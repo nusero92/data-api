@@ -14,6 +14,9 @@ def search_city(query):
     response = requests.get(f"https://weather.lewagon.com/geo/1.0/direct?q={query}&limit=5" ).json()
     if not response:
         return None
+    if len(response)>1:
+        for opt in enumerate(response,1):
+            print (f"{opt[0]},{opt[1]['name']},{opt[1]['country']}")
     citys=response[0]
     return {'name': citys['name'],
             'lat':citys['lat'],
